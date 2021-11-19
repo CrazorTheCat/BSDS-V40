@@ -151,7 +151,7 @@ class LogicConfData:
         self.writeLong(66, 1)
         self.writeLong(61, 36270) # SupportDisabled State | if 36218 < state its true
         self.writeLong(47, 41381)
-        self.writeLong(29, 10) # Skin Group Active For Campaign
+        self.writeLong(29, 0) # Skin Group Active For Campaign
         self.writeLong(48, 41381)
         self.writeLong(50, 0) # Coming up quests placeholder
         self.writeLong(1100, 500)
@@ -166,7 +166,7 @@ class LogicConfData:
         self.writeLong(78, 1)
         self.writeLong(10046, 1)
 
-        self.writeVint(3)  # Timed Int Value Entry
+        self.writeVint(2)  # Timed Int Value Entry
 
         # Double tokens event
         self.writeVint(14)
@@ -177,12 +177,6 @@ class LogicConfData:
         # Gold rush event
         self.writeVint(31)
         self.writeVint(1)
-        self.writeVint(0)
-        self.writeVint(700000) # Time left
-
-        # Skin campaign
-        self.writeVint(29)
-        self.writeVint(10)
         self.writeVint(0)
         self.writeVint(700000) # Time left
 
