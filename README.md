@@ -1,1 +1,1 @@
-ANDROID : https://www.mediafire.com/file/a996ec8ngnm33qc/com.projectbsds.v40150.apk/file
+ANDROID : https://www.mediafire.com/file/z29h4xqqtwge1cz/com.projectbsds.v40150-rev1.apk/file
