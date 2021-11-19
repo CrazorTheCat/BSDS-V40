@@ -106,6 +106,7 @@ knownList = {
     14167: 'ChronosEventSeenMessage',
     14177: 'PlayAgainMessage',
     14178: 'DebugCommandMessage',
+    14199: 'LookForGameRoomRequestMessage',
     14211: 'UnbindFacebookAccountMessage',
     14201: 'BindFacebookAccountMessage',
     14202: 'BindKakaoAccountMessage',

@@ -115,7 +115,7 @@ class LogicDailyData:
             if i != 0:
                 self.writeVint(34500)
             else:
-                self.writeVint(29000)
+                self.writeVint(28500)
             self.writeBoolean(True)
             self.writeVint(0)
 
