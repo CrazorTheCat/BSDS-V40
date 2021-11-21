@@ -19,6 +19,51 @@ class LogicClientHome:
         for notifInfo in Configuration.Inbox:
             NotificationFactory.encode(self, (Configuration.Inbox.index(notifInfo), notifInfo))
 
+        # TODO
+        # self.writeVint(58) # New Club For Club League
+        # self.writeInt(10)
+        # self.writeBoolean(True)
+        # self.writeInt(9999)
+        # self.writeString("BSDS")
+        # self.writeVLong(0, 1)
+        # self.writeDataReference(0)
+        # self.writeString("BSDS HACC")
+        #
+        # self.writeVint(59)
+        # self.writeInt(11)
+        # self.writeBoolean(False)
+        # self.writeInt(9999)
+        # self.writeString("BSDS")
+        # self.writeVint(1)
+        # self.writeVint(1)
+        # self.writeVLong(0, 1)
+        # self.writeVLong(0, 1)
+        # self.writeVint(1)
+        # self.writeVint(1)
+        # self.writeVint(1)
+        # self.writeVint(1)
+        # self.writeVint(1)
+        #
+        # self.writeVint(61) # Event Day Ended
+        # self.writeInt(12)
+        # self.writeBoolean(True)
+        # self.writeInt(9999)
+        # self.writeString("BSDS")
+        # self.writeVint(1)
+        # self.writeVLong(0, 1)
+        # self.writeVLong(0, 1)
+        # self.writeDataReference(0, 0)
+        # self.writeVint(1)
+        # self.writeVint(1)
+        # self.writeVint(1)
+        # self.writeVint(1)
+        # self.writeVint(1)
+        # self.writeVint(1)
+        # self.writeVint(1)
+        # self.writeVint(1)
+        # self.writeVint(1)
+
+
         self.writeVint(-1)  # VideoAdStarted
         self.writeBoolean(False)
         self.writeVint(0)  # GatchaDrop

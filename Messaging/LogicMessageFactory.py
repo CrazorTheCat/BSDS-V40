@@ -1,4 +1,5 @@
 from Messaging.Packets.Client.Alliance.AskForAllianceDataMessage import AskForAllianceDataMessage
+from Messaging.Packets.Client.Alliance.UnknownAskMessage import UnknownAskMessage
 from Messaging.Packets.Client.Authentication.LoginMessage import LoginMessage
 from Messaging.Packets.Client.Devices.AnalyticEventMessage import AnalyticEventMessage
 from Messaging.Packets.Client.Game.EndClientTurnMessage import EndClientTurnMessage
@@ -13,6 +14,7 @@ identifiers = {
     10108: KeepAliveMessage,
     10110: AnalyticEventMessage,
     10212: ChangeAvatarNameMessage,
+    12160: UnknownAskMessage,
     14102: EndClientTurnMessage,
     14109: GoHomeFromOfflinePractiseMessage,
     14110: AskForBattleEndMessage,

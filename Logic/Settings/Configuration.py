@@ -68,5 +68,16 @@ class Configuration:
             'Text': "Hacc",
             'RewardType': 1,
             'RewardAmount': 666
+        },
+        {
+            'ID': 83,
+            'Timer': 0,
+            'ShowAtLaunch': True,
+            'Text': "",
+            'Title': "BRAWL TALK IS HERE!",
+            'Subtitle': "Legendary Sidekick, MAKE Skin, and MORE!",
+            'ButtonText': 'Here we go!',
+            'ImageUrl': '/36042168-49af-4e79-b5f3-13c8c279bc5c_brawltalkpopup.png',
+            'RedirectLink': 'brawlstars://extlink?page=https%3A%2F%2Fyoutu.be%2F9jycpItX9l4'
         }
     ]

@@ -75,7 +75,7 @@ class LogicDailyData:
 
         self.writeVint(0)  # Shop Offers
 
-        self.writeVint(0)  # Array
+        self.writeVint(0)
 
         self.writeVint(200)  # Available tokens from battles
         self.writeVint(-1)  # Timer for new tokens
@@ -88,7 +88,7 @@ class LogicDailyData:
         self.writeString('CA')
         self.writeString("Project BSDS")
 
-        self.writeVint(17)
+        self.writeVint(18)
         self.writeLong(3, 0)  # TokensGained
         self.writeLong(4, 0)  # TrophiesGained
         self.writeLong(6, 0)  # DemoAccount
@@ -98,7 +98,7 @@ class LogicDailyData:
         self.writeLong(10, 0)  # PowerPlayTrophiesGained
         self.writeLong(12, 1)  # Unknown
         self.writeLong(14, 0)  # CoinsGained
-        self.writeLong(15, 0)  # AgeScreen | 3 = underage (disable social media) | 1 = age popup
+        self.writeLong(15, 2)  # AgeScreen | 3 = underage (disable social media) | 1 = age popup
         self.writeLong(16, 1)
         self.writeLong(17, 1)  # TeamChatMuted
         self.writeLong(18, 1)  # EsportButton
@@ -106,6 +106,7 @@ class LogicDailyData:
         self.writeLong(20, 0)  # GemsGained
         self.writeLong(21, 1)  # LookingForTeamState
         self.writeLong(22, 1)
+        self.writeLong(24, 1) # Have already watched club league stupid animation
 
         self.writeVint(0)
 

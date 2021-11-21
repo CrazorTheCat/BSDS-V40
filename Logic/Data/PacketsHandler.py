@@ -26,17 +26,17 @@ class PacketsHandler:
                 packet_name = identifiers[packet_identifier].__name__
 
                 print(f"---------------------------------------------------------------------------------------------")
-                print(f"\033[93m[{Utils.GetTime(self)}] [SERVER] PacketID: {packet_identifier} Name: {packet_name} Length: {length} Version: {version}, Data: {data}")
+                print(f"\033[93m[{Utils.GetTime(self)}] [SERVER] PacketID: {packet_identifier} Hex: {hex(packet_identifier)} Name: {packet_name} Length: {length} Version: {version}, Data: {data}")
 
                 message.decode()
                 message.process()
 
             elif packet_identifier in knownList:
                 print(f"---------------------------------------------------------------------------------------------")
-                print(f"\033[93m[{Utils.GetTime(self)}] [SERVER] PacketID: {packet_identifier} Name: {knownList[packet_identifier]} Length: {length} Version: {version}, Data: {data}")
+                print(f"\033[93m[{Utils.GetTime(self)}] [SERVER] PacketID: {packet_identifier} Hex: {hex(packet_identifier)} Name: {knownList[packet_identifier]} Length: {length} Version: {version}, Data: {data}")
             else:
                 print(f"---------------------------------------------------------------------------------------------")
-                print(f"\033[93m[{Utils.GetTime(self)}] [SERVER] PacketID: {packet_identifier} Name: Unknown Length: {length} Version: {version}, Data: {data}")
+                print(f"\033[93m[{Utils.GetTime(self)}] [SERVER] PacketID: {packet_identifier} Hex: {hex(packet_identifier)} Name: Unknown Length: {length} Version: {version}, Data: {data}")
 
             # Yes i like to put useless line of code ¯\_(ツ)_/¯
 

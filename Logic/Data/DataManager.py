@@ -143,7 +143,7 @@ class Writer:
             self.version = 0
             self.writeInt16(0)
         print(f"---------------------------------------------------------------------------------------------")
-        print(f"\033[92m[{Utils.GetTime(self)}] [CLIENT] PacketID: {self.id} Name: {self.__class__.__name__} Length: {len(packet)} Version: {self.version}")
+        print(f"\033[92m[{Utils.GetTime(self)}] [CLIENT] PacketID: {self.id} Hex: {hex(self.id)} Name: {self.__class__.__name__} Length: {len(packet)} Version: {self.version}")
         crypto_bytes = b'\xff\xff\x00\x00\x00\x00\x00'
         if cryptoInfo.changed == False:
             cryptoInfo.cryptobytesPosition = cryptoBytesEnd

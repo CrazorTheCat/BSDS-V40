@@ -14,6 +14,12 @@ from Logic.Notifications.VanityItemRewardNotification import VanityItemRewardNot
 
 notificationId = {
     2: 'DonateNotification',
+    57: 'unammed',
+    58: 'unammed',
+    59: 'unammed',
+    60: 'unammed',
+    61: 'unammed',
+    62: 'unammed',
     63: ChallengeRewardNotification,
     64: BoxRewardNotification,
     66: 'FloaterTextNotification',
