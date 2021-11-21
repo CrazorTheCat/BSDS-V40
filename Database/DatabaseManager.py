@@ -5,7 +5,7 @@ import traceback
 
 class DatabaseManager():
     def __init__(self):
-        self.conn = sqlite3.connect("player.sqlite")
+        self.conn = sqlite3.connect("Database/player.sqlite")
         self.cursor = self.conn.cursor()
         try:
             self.cursor.execute("""CREATE TABLE main (LowID integer, Token text, Data json)""")

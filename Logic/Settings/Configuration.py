@@ -72,7 +72,7 @@ class Configuration:
         {
             'ID': 83,
             'Timer': 0,
-            'ShowAtLaunch': True,
+            'ShowAtLaunch': False,
             'Text': "",
             'Title': "BRAWL TALK IS HERE!",
             'Subtitle': "Legendary Sidekick, MAKE Skin, and MORE!",
