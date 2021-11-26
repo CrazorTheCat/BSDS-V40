@@ -15,7 +15,7 @@ class Core:
         self.server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
     def CoreInit(self):
-        self.server.bind(('0.0.0.0', 9339))
+        self.server.bind(('127.0.0.1', 9339))
         print("Socket binded!")
         while True:
             self.server.listen()
