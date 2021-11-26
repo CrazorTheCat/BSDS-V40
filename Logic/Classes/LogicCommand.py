@@ -8,4 +8,4 @@ class LogicCommand:
     def encode(self):
         self.writeVint(0)
         self.writeVint(0)
-        self.writeVLong(self.player.HighID, self.player.LowID)
+        self.writeLogicLong(self.player.HighID, self.player.LowID)

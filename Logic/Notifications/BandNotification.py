@@ -11,4 +11,4 @@ class BandNotification:
 
     def encode(self: Writer, info):
         BaseNotification.encode(self, info)
-        PlayerDisplayData.encode(self, info)
+        PlayerDisplayData.encode(self, info[1]['Target'])

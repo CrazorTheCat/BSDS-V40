@@ -20,7 +20,7 @@ class DatabaseManager():
         except Exception:
             print(traceback.format_exc())
 
-    def GetAllDb(self, low_id):
+    def GetAllDb(self):
         self.playersId = []
         try:
             self.cursor.execute("SELECT * from main")
@@ -42,9 +42,10 @@ class DatabaseManager():
         try:
             self.player = player
             self.cursor.execute("SELECT * from main where LowID=?", (low,))
-            self.players = self.cursor.fetchall()
-            self.players = json.loads(self.players[0][2])
+            playersdata = self.cursor.fetchall()
+            self.players = json.loads(playersdata[0][2])
             self.player.Name = self.players['name']
+            self.player.Token = playersdata[0][1]
             self.player.isRegistred = self.players['IsRegistred']
             self.player.level = self.players['level']
             self.player.doNotDisturb = self.players['DoNotDisturb']
@@ -57,21 +58,23 @@ class DatabaseManager():
             self.player.brawlersTrophies = self.players['brawlersTrophies']
             self.player.selectedRandomSkin = self.players['selectedRandomSkin']
             self.player.starpowerID = self.players['starpowerID']
-            self.player.thumbnails = self.players['playericon']
+            self.player.thumbnail = self.players['playericon']
             self.player.nameColor = self.players['namecolor']
+            self.player.region = self.players['region']
             self.player.trophies = self.players['trophies']
             self.player.experience = self.players['experience']
             self.player.room_id = self.players['gameroomID']
             self.player.roomInfo = self.players['roomInfo']
-            self.player.alliance_id = self.players['allianceID']
+            self.player.allianceID = self.players['allianceID']
             self.player.isBanned = self.players['isBanned']
             self.player.gems = self.players['gems']
             self.player.coins = self.players['coins']
+            self.player.clubMailInbox = self.players['clubMailInbox']
 
         except Exception:
             print(traceback.format_exc())
 
-    def update_player_data(self, data, lowID):
+    def updatePlayerData(self, data, lowID):
         try:
             self.cursor.execute("UPDATE main SET Data=? WHERE LowID=?", (json.dumps(data, ensure_ascii=0), lowID))
             self.conn.commit()

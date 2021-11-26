@@ -1,20 +1,31 @@
+import json
+
+from Database.ClubManager import ClubManager
+from Database.DatabaseManager import DatabaseManager
 from Logic.Data.DataManager import Writer
+from Logic.Files.Classes.Regions import Regions
 
 
 class PlayerProfileMessage(Writer):
-    def __init__(self, client, player, entry):
+    def __init__(self, client, player, playerID):
         super().__init__(client)
         self.id = 24113
         self.client = client
         self.player = player
-        self.info = entry
+        self.playerID = playerID
 
     def encode(self):
-        self.writeVLong(self.info.playerID[0], self.info.playerID[1])
+        playerdb = DatabaseManager()
+        try:
+            playerData = json.loads(playerdb.getPlayerWithLowID(self.playerID[1])[0][2])
+        except IndexError:
+            return
+
+        self.writeLogicLong(self.playerID[0], self.playerID[1])
         self.writeVint(0)
 
         # Brawlers
-        self.writeVint(len(self.player.allBrawlers))
+        self.writeVint(len(self.player.allBrawlers)) # TODO: Sync player brawlers
         for i in self.player.allBrawlers:
             self.writeDataReference(16, i)
             self.writeDataReference(0, 0)
@@ -28,13 +39,13 @@ class PlayerProfileMessage(Writer):
         self.writeVint(0) # 3v3 Victories
 
         self.writeVint(2)
-        self.writeVint(self.player.experience) # Experince
+        self.writeVint(playerData['experience']) # Experince
 
         self.writeVint(3)
-        self.writeVint(self.player.trophies) # Current Trophies
+        self.writeVint(playerData['trophies']) # Current Trophies
 
         self.writeVint(4)
-        self.writeVint(self.player.highestTrophies) # Highest Trophies
+        self.writeVint(playerData['highestTrophies']) # Highest Trophies
 
         self.writeVint(5)
         self.writeVint(len(self.player.allBrawlers))
@@ -72,11 +83,32 @@ class PlayerProfileMessage(Writer):
         self.writeVint(19)
         self.writeVint(0)  # Highest club league
 
-        self.writeString(self.player.Name)
+        self.writeString(playerData['name'])
         self.writeVint(100)
-        self.writeVint(28000000 + self.player.thumbnails)
-        self.writeVint(43000000 + self.player.nameColor)
+        self.writeVint(28000000 + playerData['playericon'])
+        self.writeVint(43000000 + playerData['namecolor'])
         self.writeVint(-1)
 
-        self.writeVint(0)
-        self.writeVint(0)
+        self.writeBoolean(playerData['allianceID'] != [0, 0])
+
+        if playerData['allianceID'] != [0, 0]:
+            clubdb = ClubManager()
+            clubData = json.loads(clubdb.getClubWithLowID(playerData['allianceID'][1])[0][1])
+            localMemberData = clubdb.getMemberWithLowID(clubData, self.playerID[1])
+            self.writeLong(clubData['HighID'], clubData['LowID'])
+            self.writeString(clubData['Name'])
+            self.writeDataReference(8, clubData['BadgeID'])
+            self.writeVint(clubData['Type']) # Type
+            self.writeVint(len(clubData['Members'])) # Total Members
+            self.writeVint(clubdb.getTotalTrophies(clubData)) # Total Trophies
+            self.writeVint(clubData['TrophiesRequired']) # Trophies Required
+            self.writeDataReference(0)
+            self.writeString(Regions.getRegionByID(self, clubData['RegionID'])) # Region
+            self.writeVint(0)
+            self.writeBoolean(clubData['FamilyFriendly']) # Family Friendly
+            self.writeVint(0)
+
+            self.writeDataReference(25, localMemberData['Role'])
+
+        else:
+            self.writeDataReference(0, 0)

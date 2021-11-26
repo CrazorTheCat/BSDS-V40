@@ -13,10 +13,10 @@ class LogicClearShopTickersCommand(Reader):
 
     def decode(self):
         print()
-        print(self.readVint())
-        print(self.readVint())
-        print(self.readVint())
-        print(self.readVint())
+        self.readVint()
+        self.readVint()
+        self.readVint()
+        self.readVint()
 
     def process(self):
         pass

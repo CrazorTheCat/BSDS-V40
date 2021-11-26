@@ -13,7 +13,7 @@ class LogicPurchaseHeroLvlUpMaterialCommand(Reader):
 
     def decode(self):
         print()
-        print(self.readVint())
+        self.readVint()
 
     def process(self):
         pass

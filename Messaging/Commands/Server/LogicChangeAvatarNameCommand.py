@@ -17,7 +17,7 @@ class LogicChangeAvatarNameCommand(Writer):
         self.database = json.loads(self.db.getPlayerWithLowID(self.player.LowID)[0][2])
         self.database['name'] = self.player.Name
         self.database['IsRegistred'] = True
-        self.db.update_player_data(self.database, self.player.LowID)
+        self.db.updatePlayerData(self.database, self.player.LowID)
 
         self.writeVint(201)
         self.writeString(self.player.Name)

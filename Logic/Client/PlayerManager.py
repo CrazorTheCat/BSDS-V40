@@ -11,6 +11,9 @@ from Logic.Client import DevicesManager
 
 
 class Players:
+    def __init__(self):
+        pass
+
     HighID = 0
     LowID = 0
     Token = ""
@@ -19,6 +22,8 @@ class Players:
     isBanned = False
 
     friends = []
+
+    allianceTry = 0
 
     trophies = 10000
     highestTrophies = 10000
@@ -33,8 +38,9 @@ class Players:
     ClubCoins = 9999999
     GearsScrap = 9999999
 
-    thumbnails = 0
+    thumbnail = 0
     nameColor = 0
+    region = "CA"
 
     brawlerID = 0
     skinID = 0
@@ -51,7 +57,7 @@ class Players:
     allPins = Pins.getPinsID()
     allThumbnailsReward = PlayerThumbnails.getThumbnailsID()
 
-    alliance_id = 0
+    allianceID = [0, 0]
 
     room_id = [0, 0]
     roomInfo = {
@@ -60,24 +66,33 @@ class Players:
         "roomType": 0
     }
 
+    clubMailInbox = [
+
+    ]
+
     doNotDisturb = False
     playerState = False
     lastOnline = 0
 
     device = DevicesManager.Device
 
-    def CreateAccount(self, highid, lowid, token):
-        if lowid == 0:
+    def CreateAccount(self, highid, lowid, token, overide=False):
+
+        if overide == False:
             self.HighID = int(''.join([str(random.randint(0, 9)) for _ in range(1)]))
             self.LowID = int(''.join([str(random.randint(0, 9)) for _ in range(8)]))
             self.Token = ''.join(random.choice(string.ascii_letters + string.digits) for i in range(40))
+        else:
+            self.HighID = highid
+            self.LowID = lowid
+            self.Token = token
 
         DBData = {
                 'HighID': self.HighID,
                 'LowID': self.LowID,
                 'Token': self.Token,
                 'name': self.Name,
-                'allianceID': self.alliance_id,
+                'allianceID': self.allianceID,
                 'PlayerState': self.playerState,
                 'LastOnline': self.lastOnline,
                 'DoNotDisturb': self.doNotDisturb,
@@ -88,8 +103,9 @@ class Players:
                 'brawlersTrophies': self.brawlersTrophies,
                 'brawlerState': self.brawlerState,
                 'starpowerID': self.starpowerID,
-                'playericon': self.thumbnails,
+                'playericon': self.thumbnail,
                 'namecolor': self.nameColor,
+                'region': self.region,
                 'highestTrophies': self.highestTrophies,
                 'IsRegistred': self.isRegistred,
                 'trophies': self.trophies,
@@ -99,6 +115,7 @@ class Players:
                 'coins': self.coins,
                 'isBanned': self.isBanned,
                 'gameroomID': self.room_id,
+                'clubMailInbox': self.clubMailInbox,
                 "roomInfo": {
                     "eventSlot": 0,
                     "mapID": 0,

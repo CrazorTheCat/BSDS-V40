@@ -4,12 +4,12 @@ from Logic.Data.DataManager import Reader
 
 class LogicPlayerMap:
     def decode(self: Reader):
-        self.readVLong("MapID")
+        self.readLogicLong("MapID")
         self.readString("MapName")
         self.readVint("GameModeVariation")
         self.readDataReference("MapEnvironmentData")
         self.readCompressedString("MapData")
-        self.readVLong("AccountID")
+        self.readLogicLong("AccountID")
         self.readString("AvatarName")
         self.readVint("State")
         self.readLong("LastUpdateTimeSecondsSinceEpoch")

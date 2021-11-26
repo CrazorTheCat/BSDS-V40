@@ -22,13 +22,6 @@ class Configuration:
             'Text': "Notification text"
         },
         {
-            'ID': 82,
-            'Timer': 9999,
-            'ShowAtLaunch': False,
-            'Text': "Inbox Notification",
-            'Sender': {'Name': 'Crazor', 'Thumbnail': 17, 'NameColor': 9}
-        },
-        {
             'ID': 79,
             'Timer': 9999,
             'ShowAtLaunch': False,

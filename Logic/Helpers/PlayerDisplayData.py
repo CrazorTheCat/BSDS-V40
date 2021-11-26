@@ -17,10 +17,10 @@ class PlayerDisplayData:
         self.readVint()
 
     def encode(self: Writer, info):
-        self.writeString(info[1]['Sender']['Name'])
+        self.writeString(info['Name'])
         self.writeVint(100)
-        self.writeVint(28000000 + info[1]['Sender']['Thumbnail'])
-        self.writeVint(43000000 + info[1]['Sender']['NameColor'])
+        self.writeVint(28000000 + info['Thumbnail'])
+        self.writeVint(43000000 + info['NameColor'])
         self.writeVint(-1)
 
     def getNameColor(self, globalId):
