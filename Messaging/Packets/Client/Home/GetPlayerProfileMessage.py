@@ -14,4 +14,4 @@ class GetPlayerProfileMessage(Reader):
         self.playerID = self.readLong()
 
     def process(self):
-        PlayerProfileMessage(self.client, self.player, self).send(self.player.LowID)
+        PlayerProfileMessage(self.client, self.player, self.playerID).send(self.player.LowID)

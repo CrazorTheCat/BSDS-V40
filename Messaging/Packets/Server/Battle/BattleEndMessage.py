@@ -56,7 +56,7 @@ class BattleEndMessage(Writer):
                 self.writeLong(self.player.HighID, self.player.LowID)
             self.writeString(playerEntry["Name"])  # PlayerName
             self.writeVint(100)
-            self.writeVint(28000000 + self.player.thumbnails)  # PlayerThumbnail
+            self.writeVint(28000000 + self.player.thumbnail)  # PlayerThumbnail
             self.writeVint(43000000 + self.player.nameColor)  # NameColor
             self.writeVint(-1)
 
@@ -74,7 +74,7 @@ class BattleEndMessage(Writer):
         self.writeVint(9999999)
         self.writeVint(9999999)
 
-        self.writeDataReference(28, self.player.thumbnails)
+        self.writeDataReference(28, self.player.thumbnail)
 
         self.writeBoolean(False)  # PlayAgainStatus
 

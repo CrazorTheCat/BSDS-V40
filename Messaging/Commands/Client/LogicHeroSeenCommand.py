@@ -13,8 +13,8 @@ class LogicHeroSeenCommand(Reader):
 
     def decode(self):
         print()
-        print(self.readDataReference())
-        print(self.readInt())
+        self.readDataReference()
+        self.readInt()
 
     def process(self):
         pass

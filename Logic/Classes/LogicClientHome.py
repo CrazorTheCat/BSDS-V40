@@ -15,9 +15,12 @@ class LogicClientHome:
         LogicConfData.encode(self)
         self.writeLong(self.player.HighID, self.player.LowID)  # PlayerID
 
-        self.writeVint(len(Configuration.Inbox)) # Notification Factory
+        self.writeVint(len(Configuration.Inbox) + len(self.player.clubMailInbox)) # Notification Factory
         for notifInfo in Configuration.Inbox:
             NotificationFactory.encode(self, (Configuration.Inbox.index(notifInfo), notifInfo))
+
+        for notifInfo2 in self.player.clubMailInbox:
+            NotificationFactory.encode(self, (notifInfo2['Index'], notifInfo2))
 
         # TODO
         # self.writeVint(58) # New Club For Club League
@@ -25,7 +28,7 @@ class LogicClientHome:
         # self.writeBoolean(True)
         # self.writeInt(9999)
         # self.writeString("BSDS")
-        # self.writeVLong(0, 1)
+        # self.writeLogicLong(0, 1)
         # self.writeDataReference(0)
         # self.writeString("BSDS HACC")
         #
@@ -36,8 +39,8 @@ class LogicClientHome:
         # self.writeString("BSDS")
         # self.writeVint(1)
         # self.writeVint(1)
-        # self.writeVLong(0, 1)
-        # self.writeVLong(0, 1)
+        # self.writeLogicLong(0, 1)
+        # self.writeLogicLong(0, 1)
         # self.writeVint(1)
         # self.writeVint(1)
         # self.writeVint(1)
@@ -50,8 +53,8 @@ class LogicClientHome:
         # self.writeInt(9999)
         # self.writeString("BSDS")
         # self.writeVint(1)
-        # self.writeVLong(0, 1)
-        # self.writeVLong(0, 1)
+        # self.writeLogicLong(0, 1)
+        # self.writeLogicLong(0, 1)
         # self.writeDataReference(0, 0)
         # self.writeVint(1)
         # self.writeVint(1)

@@ -11,7 +11,7 @@ class LogicDailyData:
         self.writeVint(self.player.highestTrophies)
         self.writeVint(self.player.trophy_road_tier)
         self.writeVint(self.player.experience)
-        self.writeDataReference(28, self.player.thumbnails)
+        self.writeDataReference(28, self.player.thumbnail)
         self.writeDataReference(43, self.player.nameColor)
 
         # Array
@@ -85,7 +85,7 @@ class LogicDailyData:
         self.writeVint(0)
         self.writeVint(0)
         self.writeDataReference(16, self.player.brawlerID)
-        self.writeString('CA')
+        self.writeString(self.player.region)
         self.writeString("Project BSDS")
 
         self.writeVint(18)

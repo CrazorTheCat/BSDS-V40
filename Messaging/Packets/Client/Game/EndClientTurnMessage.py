@@ -12,16 +12,15 @@ class EndClientTurnMessage(Reader):
         self.commmandID = []
 
     def decode(self):
-        print(self.readBoolean())
-        print(self.readVint())
-        print(self.readVint())
+        self.readBoolean()
+        self.readVint()
+        self.readVint()
         count = self.readVint()
-        print(count)
         for command in range(count):
             self.commmandID.append(self.readVint())
             self.tick1 = self.readVint()
             self.tick2 = self.readVint()
-            self.readVLong()
+            self.readLogicLong()
             if self.commmandID[command] in commandIdentifiers:
                 if type(commandIdentifiers[self.commmandID[command]]) != str:
                     command = commandIdentifiers[self.commmandID[command]]

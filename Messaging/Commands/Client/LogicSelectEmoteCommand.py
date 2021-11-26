@@ -13,8 +13,8 @@ class LogicSelectEmoteCommand(Reader):
 
     def decode(self):
         print()
-        print(self.readDataReferenceDouble())
-        print(self.readVint())
+        self.readDataReferenceDouble()
+        self.readVint()
 
     def process(self):
         pass

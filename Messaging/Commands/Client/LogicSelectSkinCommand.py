@@ -15,8 +15,7 @@ class LogicSelectSkinCommand(Reader):
     def decode(self):
         print()
         self.skinData = self.readDataReferenceDouble()
-        print(self.skinData)
-        print(self.readVint())
+        self.readVint()
 
     def process(self):
         self.db = DatabaseManager()
@@ -26,4 +25,4 @@ class LogicSelectSkinCommand(Reader):
             self.database['selectedSkin'][Skins.getBrawlerBySkin(self, self.skinData[1])] = self.skinData[1]
         elif self.randomSkinData != 0:
             self.database['selectedRandomSkin'].append(self.randomSkinData[1])
-        self.db.update_player_data(self.database, self.player.LowID)
+        self.db.updatePlayerData(self.database, self.player.LowID)

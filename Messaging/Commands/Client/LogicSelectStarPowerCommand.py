@@ -13,7 +13,7 @@ class LogicSelectStarPowerCommand(Reader):
 
     def decode(self):
         print()
-        print(self.readDataReferenceDouble())
+        self.readDataReferenceDouble()
 
     def process(self):
         pass

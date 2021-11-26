@@ -10,13 +10,13 @@ class UnknownLeaderboardAllianceMessage(Writer):
 
     def encode(self):
         self.writeVint(1)
-        self.writeVLong(0, 1)
+        self.writeLogicLong(0, 1)
         self.writeVint(1)
         self.writeVint(1)
 
         self.writeVint(1)
 
-        self.writeVLong(0, 1)
+        self.writeLogicLong(0, 1)
         self.writeLong(0, 1)
         self.writeDataReference(8, 16)
         self.writeVint(0)

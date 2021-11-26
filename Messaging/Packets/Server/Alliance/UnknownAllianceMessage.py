@@ -34,12 +34,12 @@ class UnknownAllianceMessage(Writer):
 
         self.writeBoolean(True)
 
-        self.writeVLong(0, 1) # LeagueID
+        self.writeLogicLong(0, 1) # LeagueID
         self.writeVint(0)
         self.writeVint(0)
         self.writeVint(0)
         self.writeVint(0)
-        self.writeVLong(0, 1)
+        self.writeLogicLong(0, 1)
         self.writeVint(1) # Day number
         self.writeVint(0)
         self.writeVint(0)
@@ -50,7 +50,7 @@ class UnknownAllianceMessage(Writer):
 
         self.writeBoolean(True)
 
-        self.writeVLong(0, 1)
+        self.writeLogicLong(0, 1)
         self.writeVint(0)
         self.writeVint(0)
         self.writeVint(0) # Used normal tickets

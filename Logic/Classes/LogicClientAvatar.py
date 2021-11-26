@@ -6,9 +6,9 @@ class LogicClientAvatar:
         pass
 
     def encode(self: Writer):
-        self.writeVLong(self.player.HighID, self.player.LowID)  # PlayerID
-        self.writeVLong(self.player.HighID, self.player.LowID)
-        self.writeVLong(self.player.HighID, self.player.LowID)
+        self.writeLogicLong(self.player.HighID, self.player.LowID)  # PlayerID
+        self.writeLogicLong(self.player.HighID, self.player.LowID)
+        self.writeLogicLong(self.player.HighID, self.player.LowID)
 
         self.writeString(self.player.Name)  # PlayerName
         self.writeBoolean(self.player.isRegistred)  # isRegistred

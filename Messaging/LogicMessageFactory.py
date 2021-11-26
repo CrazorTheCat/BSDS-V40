@@ -1,4 +1,14 @@
+from Messaging.Packets.Client.Alliance.SendAllianceMailMessage import SendAllianceMailMessage
+from Messaging.Packets.Client.Alliance.AlliancePremadeChatMessage import AlliancePremadeChatMessage
 from Messaging.Packets.Client.Alliance.AskForAllianceDataMessage import AskForAllianceDataMessage
+from Messaging.Packets.Client.Alliance.AskForJoinableAlliancesListMessage import AskForJoinableAlliancesListMessage
+from Messaging.Packets.Client.Alliance.ChangeAllianceMemberRoleMessage import ChangeAllianceMemberRoleMessage
+from Messaging.Packets.Client.Alliance.ChangeAllianceSettingsMessage import ChangeAllianceSettingsMessage
+from Messaging.Packets.Client.Alliance.ChatToAllianceStreamMessage import ChatToAllianceStreamMessage
+from Messaging.Packets.Client.Alliance.CreateAllianceMessage import CreateAllianceMessage
+from Messaging.Packets.Client.Alliance.JoinAllianceMessage import JoinAllianceMessage
+from Messaging.Packets.Client.Alliance.LeaveAllianceMessage import LeaveAllianceMessage
+from Messaging.Packets.Client.Alliance.SearchAlliancesMessage import SearchAlliancesMessage
 from Messaging.Packets.Client.Alliance.UnknownAskMessage import UnknownAskMessage
 from Messaging.Packets.Client.Authentication.LoginMessage import LoginMessage
 from Messaging.Packets.Client.Devices.AnalyticEventMessage import AnalyticEventMessage
@@ -19,7 +29,17 @@ identifiers = {
     14109: GoHomeFromOfflinePractiseMessage,
     14110: AskForBattleEndMessage,
     14113: GetPlayerProfileMessage,
+    14301: CreateAllianceMessage,
     14302: AskForAllianceDataMessage,
+    14303: AskForJoinableAlliancesListMessage,
+    14305: JoinAllianceMessage,
+    14306: ChangeAllianceMemberRoleMessage,
+    14308: LeaveAllianceMessage,
+    14315: ChatToAllianceStreamMessage,
+    14316: ChangeAllianceSettingsMessage,
+    14324: SearchAlliancesMessage,
+    14330: SendAllianceMailMessage,
+    14469: AlliancePremadeChatMessage,
 }
 
 knownList = {
@@ -167,6 +187,7 @@ knownList = {
     14405: 'AskForAvatarStreamMessage',
     14406: 'AskForBattleReplayStreamMessage',
     14418: 'RemoveAvatarStreamEntryMessage',
+    14469: 'AlliancePremadeChatMessage',
     14479: 'TeamInvitationResponseMessage',
     14600: 'AvatarNameCheckRequestMessage',
     14700: 'ListBrawlTvChannelsMessage',

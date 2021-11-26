@@ -12,8 +12,7 @@ class LogicGatchaCommand(Reader):
         self.player = player
 
     def decode(self):
-        print()
-        print(self.readVint())
+        self.readVint()
 
     def process(self):
         pass

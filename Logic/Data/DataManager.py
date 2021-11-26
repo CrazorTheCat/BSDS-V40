@@ -44,7 +44,7 @@ class Writer:
     def writeLong(self, high, low):
         self.buffer += high.to_bytes(4, 'big') + low.to_bytes(4, 'big')
 
-    def writeVLong(self, high, low):
+    def writeLogicLong(self, high, low):
         self.writeVint(high)
         self.writeVint(low)
 
@@ -104,10 +104,7 @@ class Writer:
             self.buffer += encoded
 
     def writeStringReference(self, string: str = None):
-        encoded = string.encode('utf-8')
-        self.writeInt16(0)
-        self.writeVint(len(encoded))
-        self.buffer += encoded
+        self.writeString(string)
 
     def writeByte(self, data):
         if data > 255:
@@ -142,8 +139,12 @@ class Writer:
         else:
             self.version = 0
             self.writeInt16(0)
-        print(f"---------------------------------------------------------------------------------------------")
-        print(f"\033[92m[{Utils.GetTime(self)}] [CLIENT] PacketID: {self.id} Hex: {hex(self.id)} Name: {self.__class__.__name__} Length: {len(packet)} Version: {self.version}")
+        if self.id != 23457:
+            print(f"---------------------------------------------------------------------------------------------")
+            print(f"\033[92m[{Utils.getTime()}] [SERVER] PacketID: {self.id} Hex: {hex(self.id)} Name: {self.__class__.__name__} Length: {len(packet)} Version: {self.version} Sending to player id {PlayerLowID}")
+        # else:
+        #     print(f"\033[92m[{Utils.getTime()}] [SERVER] PacketID: {self.id} Hex: {hex(self.id)} Name: {self.__class__.__name__} Length: {len(packet)} Version: {self.version}")
+
         crypto_bytes = b'\xff\xff\x00\x00\x00\x00\x00'
         if cryptoInfo.changed == False:
             cryptoInfo.cryptobytesPosition = cryptoBytesEnd
@@ -157,7 +158,7 @@ class Writer:
             crypto_bytes = self.buffer + packet
 
         try:
-            if self.id == 23457:
+            if self.id == 23457 or self.id == 20103:
                 self.client.sendall(crypto_bytes)
                 return
             ClientsManager.SocketsList["Sockets"][PlayerLowID].sendall(crypto_bytes)
@@ -201,7 +202,7 @@ class Reader(BufferedReader):
         n = self.readVarint(True)
         return (n >> 1) ^ (-(n & 1))
 
-    def readVLong(self):
+    def readLogicLong(self):
         ID = []
         ID.append(self.readVint())
         ID.append(self.readVint())
