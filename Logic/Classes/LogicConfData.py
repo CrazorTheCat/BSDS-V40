@@ -78,16 +78,16 @@ class LogicConfData:
         self.writeVint(-64)  # GameModeVariation
         self.writeVint(0)  # State
         self.writeString() #?
-        self.writeVint(6) #?
+        self.writeVint(0) #?
         self.writeVint(0) #Defeates?
-        self.writeVint(2) #?
+        self.writeVint(3) #Total Wins
         self.writeVint(0)  # Modifiers
         self.writeVint(0) #Win's
         self.writeVint(0) #???
         self.writeBoolean(False)  # Map Maker Map Structure Array
         self.writeVint(0) #Defeates
         self.writeBoolean(False)  # Power League Data Array
-        self.writeVint(3) #Total Wins
+        self.writeVint(6) #Total Wins?
         self.writeVint(3) #?
         self.writeVint(0)  # ChronosTextEntry
         self.writeVint(-64)
@@ -103,16 +103,16 @@ class LogicConfData:
         self.writeVint(-64)  # GameModeVariation
         self.writeVint(0)  # State
         self.writeString() #?
-        self.writeVint(6) #?
+        self.writeVint(0) #?
         self.writeVint(0) #Defeates?
-        self.writeVint(2) #?
+        self.writeVint(3) #Total Wins
         self.writeVint(0)  # Modifiers
         self.writeVint(0) #Wins
         self.writeVint(0) #???
         self.writeBoolean(False)  # Map Maker Map Structure Array
         self.writeVint(0) #Defeates
         self.writeBoolean(False)  # Power League Data Array
-        self.writeVint(3) #Total Wins
+        self.writeVint(6) #Total Wins?
         self.writeVint(3) #?
         self.writeVint(0)  # ChronosTextEntry
         self.writeVint(-64)
