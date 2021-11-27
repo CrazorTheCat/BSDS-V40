@@ -37,17 +37,15 @@ class LogicDailyData:
         for i in range(0):
             self.writeDataReference(29, 0)  # SkinID
 
-        # Selected Group Skin
-        self.writeVint(1)  # Skin Count
-        for i in range(1):
-            # self.writeVint(1)  # Group Index
-            self.writeDataReference(29, 18)  # SkinID
-
         # Unlocked Skin
         self.writeVint(len(self.player.allSkins))
         for i in self.player.allSkins:
             self.writeDataReference(29, i)
 
+        # Unlocked Skin Purchase Option
+        self.writeVint(0)
+        for i in range(0):
+            self.writeDataReference(29, 0)  # SkinID
 
         # New Item
         self.writeVint(0)
@@ -88,7 +86,8 @@ class LogicDailyData:
         self.writeString(self.player.region)
         self.writeString("Project BSDS")
 
-        self.writeVint(18)
+        self.writeVint(19)
+        self.writeLong(2, 1)  # Unknown
         self.writeLong(3, 0)  # TokensGained
         self.writeLong(4, 0)  # TrophiesGained
         self.writeLong(6, 0)  # DemoAccount
@@ -98,7 +97,7 @@ class LogicDailyData:
         self.writeLong(10, 0)  # PowerPlayTrophiesGained
         self.writeLong(12, 1)  # Unknown
         self.writeLong(14, 0)  # CoinsGained
-        self.writeLong(15, 2)  # AgeScreen | 3 = underage (disable social media) | 1 = age popup
+        self.writeLong(15, 0)  # AgeScreen | 3 = underage (disable social media) | 1 = age popup
         self.writeLong(16, 1)
         self.writeLong(17, 1)  # TeamChatMuted
         self.writeLong(18, 1)  # EsportButton
