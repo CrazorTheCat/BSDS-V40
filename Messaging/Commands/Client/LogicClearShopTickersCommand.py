@@ -12,7 +12,7 @@ class LogicClearShopTickersCommand(Reader):
         self.player = player
 
     def decode(self):
-        print()
+        # print()
         self.readVint()
         self.readVint()
         self.readVint()

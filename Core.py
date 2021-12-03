@@ -34,6 +34,7 @@ class ConnectionThread(threading.Thread):
     def run(self):
         try:
             while True:
+                time.sleep(0.1)
                 # Reading and processing packet
                 PacketsHandler.ReadHeader(self)
 
@@ -51,6 +52,10 @@ class ConnectionThread(threading.Thread):
             self.client.close()
             print(traceback.format_exc())
             # exit(0)
+            return
+
+        except:
+            print(traceback.format_exc())
             return
 
 class LobbyInfoMessageThread(threading.Thread):

@@ -16,30 +16,32 @@ class Writer:
         self.endian = endian
         self.buffer = b''
 
-
-    def writeIntLE(self, data, length=4):
-        self.buffer += data.to_bytes(length, 'little')
+    def writeIntLE(self, data):
+        self.buffer += data.to_bytes(4, 'little')
 
     def writeInt8(self, data):
-        self.writeInt(data, 1)
+        self.buffer += data.to_bytes(1, 'big')
 
     def writeInt16(self, data):
-        self.writeInt(data, 2)
+        self.buffer += data.to_bytes(2, 'big')
 
     def writeInt24(self, data):
-        self.writeInt(data, 3)
+        self.buffer += data.to_bytes(3, 'big')
 
-    def writeInt(self, data: int, length: int = 4):
-        if data > 0:
-            self.buffer += data.to_bytes(length, 'big', signed=False)
-        else:
-            self.buffer += data.to_bytes(length, 'big', signed=True)
+    def writeInt(self, data: int):
+        self.buffer += data.to_bytes(4, 'big')
 
-    def writeUInteger(self, data: int, length: int = 1):
-        self.buffer += data.to_bytes(length, 'big', signed=False)
+    def writeUInt8(self, data):
+        self.buffer += data.to_bytes(1, 'big', signed=False)
 
-    def writeUInt8(self, integer: int):
-        self.writeUInteger(integer)
+    def writeUInt16(self, data):
+        self.buffer += data.to_bytes(2, 'big', signed=False)
+
+    def writeUInt24(self, data):
+        self.buffer += data.to_bytes(3, 'big', signed=False)
+
+    def writeUInt(self, data):
+        self.buffer += data.to_bytes(4, 'big', signed=False)
 
     def writeLong(self, high, low):
         self.buffer += high.to_bytes(4, 'big') + low.to_bytes(4, 'big')
@@ -48,9 +50,9 @@ class Writer:
         self.writeVint(high)
         self.writeVint(low)
 
-    def writeArrayVint(self, vintArray: list):
-        self.writeVint(len(vintArray))
-        for i in vintArray:
+    def writeLogicLongList(self, listArray: list):
+        self.writeVint(len(listArray))
+        for i in listArray:
             self.writeVint(i)
 
     def writeBoolean(self, value):
@@ -132,36 +134,25 @@ class Writer:
     def send(self, PlayerLowID, cryptoBytesEnd: int = 1):
         self.encode()
         packet = self.buffer
-        self.buffer = self.id.to_bytes(2, 'big', signed=True)
+        self.buffer = b''
+        self.writeUInt16(self.id)
         self.writeInt24(len(packet))
-        if hasattr(self, 'version'):
-            self.writeInt16(self.version)
-        else:
-            self.version = 0
-            self.writeInt16(0)
+        self.writeInt16(0)
+
         if self.id != 23457:
             print(f"---------------------------------------------------------------------------------------------")
-            print(f"\033[92m[{Utils.getTime()}] [SERVER] PacketID: {self.id} Hex: {hex(self.id)} Name: {self.__class__.__name__} Length: {len(packet)} Version: {self.version} Sending to player id {PlayerLowID}")
-        # else:
-        #     print(f"\033[92m[{Utils.getTime()}] [SERVER] PacketID: {self.id} Hex: {hex(self.id)} Name: {self.__class__.__name__} Length: {len(packet)} Version: {self.version}")
+            print(f"\033[92m[{Utils.getTime()}] [SERVER] PacketID: {self.id} Hex: {hex(self.id)} Name: {self.__class__.__name__} Length: {len(packet)} Sending to player id {PlayerLowID}")
+       # / else:
+       #      print(f"\033[92m[{Utils.getTime()}] [SERVER] PacketID: {self.id} Hex: {hex(self.id)} Name: {self.__class__.__name__} Length: {len(packet)} Version: {self.version}")
 
-        crypto_bytes = b'\xff\xff\x00\x00\x00\x00\x00'
-        if cryptoInfo.changed == False:
-            cryptoInfo.cryptobytesPosition = cryptoBytesEnd
-            cryptoInfo.changed = True
 
-        if cryptoInfo.cryptobytesPosition == 0:
-            crypto_bytes += self.buffer + packet
-        elif cryptoInfo.cryptobytesPosition == 1:
-            crypto_bytes = self.buffer + packet + crypto_bytes
-        elif cryptoInfo.cryptobytesPosition == 2:
-            crypto_bytes = self.buffer + packet
+        self.buffer += packet
 
         try:
             if self.id == 23457 or self.id == 20103:
-                self.client.sendall(crypto_bytes)
+                self.client.send(self.buffer)
                 return
-            ClientsManager.SocketsList["Sockets"][PlayerLowID].sendall(crypto_bytes)
+            ClientsManager.SocketsList["Sockets"][PlayerLowID].send(self.buffer)
         except KeyError:
             pass
 
@@ -219,9 +210,7 @@ class Reader(BufferedReader):
     def readCompressedString(self):
         self.readInt()
         data_length = self.readIntLE()
-
         compressed = self.readBytes(data_length)
-
         return zlib.decompress(compressed)
 
     def readStringReference(self):
