@@ -11,6 +11,7 @@ from Messaging.Commands.Client.LogicSelectCharacterCommand import LogicSelectCha
 from Messaging.Commands.Client.LogicSelectEmoteCommand import LogicSelectEmoteCommand
 from Messaging.Commands.Client.LogicSelectSkinCommand import LogicSelectSkinCommand
 from Messaging.Commands.Client.LogicSelectStarPowerCommand import LogicSelectStarPowerCommand
+from Messaging.Commands.Client.LogicViewInboxNotificationCommand import LogicViewInboxNotificationCommand
 
 commandIdentifiers = {
     500: LogicGatchaCommand,
@@ -36,7 +37,7 @@ commandIdentifiers = {
     525: LogicSelectCharacterCommand,
     526: 'LogicUnlockFreeSkinsCommand',
     527: 'LogicSetPlayerNameColorCommand',
-    528: 'LogicViewInboxNotificationCommand',
+    528: LogicViewInboxNotificationCommand,
     529: LogicSelectStarPowerCommand,
     530: 'LogicSetPlayerAgeCommand',
     531: 'LogicCancelPurchaseOfferCommand',

@@ -39,7 +39,7 @@ identifiers = {
     14316: ChangeAllianceSettingsMessage,
     14324: SearchAlliancesMessage,
     14330: SendAllianceMailMessage,
-    14469: AlliancePremadeChatMessage,
+    14469: AlliancePremadeChatMessage
 }
 
 knownList = {
