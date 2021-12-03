@@ -58,7 +58,7 @@ class BattleEndMessage(Writer):
             self.writeVint(100)
             self.writeVint(28000000 + self.player.thumbnail)  # PlayerThumbnail
             self.writeVint(43000000 + self.player.nameColor)  # NameColor
-            self.writeVint(-1)
+            self.writeVint(46000000)
 
         self.writeVint(0)
 

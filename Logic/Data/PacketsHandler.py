@@ -43,5 +43,3 @@ class PacketsHandler:
                 print(f"\033[93m[{Utils.getTime()}] [CLIENT] PacketID: {packet_identifier} Hex: {hex(packet_identifier)} Name: Unknown Length: {length} Version: {version}, Data: {data}")
 
             # Yes i like to put useless line of code ¯\_(ツ)_/¯
-
-            # LobbyInfoMessage(self.client, self.player).send(self.player.LowID)

@@ -56,10 +56,11 @@ class AllianceDataMessage(Writer):
         self.writeVint(len(clubData['Members'])) # Members Count
 
         for i in clubdb.getMembersSorted(clubData):
-            playerData = i[1]
-            self.writeLong(playerData['HighID'], playerData['LowID'])
-            self.writeVint(playerData['Role']) # Role
-            self.writeVint(playerData['Trophies']) # Trophies
+            memberData = i[1]
+            playerData = json.loads(playerdb.getPlayerWithLowID(memberData['LowID'])[0][2])
+            self.writeLong(memberData['HighID'], memberData['LowID'])
+            self.writeVint(memberData['Role']) # Role
+            self.writeVint(playerData['trophies']) # Trophies
             self.writeVint(0) # Player State TODO: Members state
             self.writeVint(0) # State Timer
 
@@ -72,11 +73,11 @@ class AllianceDataMessage(Writer):
 
             self.writeBoolean(False) # DoNotDisturb TODO: Do not disturb sync
 
-            self.writeString(playerData['Name']) # Player Name
+            self.writeString(playerData['name']) # Player Name
             self.writeVint(100)
-            self.writeVint(28000000 + playerData['Thumbnail']) # Player Thumbnail
-            self.writeVint(43000000 + playerData['NameColor']) # Player Name Color
-            self.writeVint(-1) # Player Brawlpass Name
+            self.writeVint(28000000 + playerData['playericon']) # Player Thumbnail
+            self.writeVint(43000000 + playerData['namecolor']) # Player Name Color
+            self.writeVint(46000000) # Color Gradients
 
             self.writeVint(-1)
             self.writeBoolean(False)
