@@ -21,7 +21,7 @@ class PlayerDisplayData:
         self.writeVint(100)
         self.writeVint(28000000 + info['Thumbnail'])
         self.writeVint(43000000 + info['NameColor'])
-        self.writeVint(-1)
+        self.writeVint(46000000)
 
     def getNameColor(self, globalId):
         LogicDataTables.getDataById(globalId)

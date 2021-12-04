@@ -87,7 +87,7 @@ class PlayerProfileMessage(Writer):
         self.writeVint(100)
         self.writeVint(28000000 + playerData['playericon'])
         self.writeVint(43000000 + playerData['namecolor'])
-        self.writeVint(-1)
+        self.writeVint(46000000)
 
         self.writeBoolean(playerData['allianceID'] != [0, 0])
 

@@ -1,3 +1,6 @@
+import json
+
+from Database.DatabaseManager import DatabaseManager
 from Logic.Data.DataManager import Writer
 
 
@@ -11,11 +14,13 @@ class AllianceMemberMessage(Writer):
         self.memberData = memberData
 
     def encode(self):
+        playerdb = DatabaseManager()
+        playerData = json.loads(playerdb.getPlayerWithLowID(self.memberData['LowID'])[0][2])
         self.writeLong(self.clubID[0], self.clubID[1])
 
         self.writeLong(self.memberData['HighID'], self.memberData['LowID'])
         self.writeVint(self.memberData['Role'])  # Role
-        self.writeVint(self.memberData['Trophies'])  # Trophies
+        self.writeVint(playerData['trophies'])  # Trophies
         self.writeVint(0)  # Player State TODO: Members state
         self.writeVint(0)  # State Timer
 
@@ -28,11 +33,11 @@ class AllianceMemberMessage(Writer):
 
         self.writeBoolean(False)  # DoNotDisturb TODO: Do not disturb sync
 
-        self.writeString(self.memberData['Name'])  # Player Name
+        self.writeString(playerData['name'])  # Player Name
         self.writeVint(100)
-        self.writeVint(28000000 + self.memberData['Thumbnail'])  # Player Thumbnail
-        self.writeVint(43000000 + self.memberData['NameColor'])  # Player Name Color
-        self.writeVint(-1)  # Player Brawlpass Name
+        self.writeVint(28000000 + playerData['playericon'])  # Player Thumbnail
+        self.writeVint(43000000 + playerData['namecolor'])  # Player Name Color
+        self.writeVint(46000000)  # Player Brawlpass Name
 
         self.writeVint(-1)
         self.writeBoolean(False)

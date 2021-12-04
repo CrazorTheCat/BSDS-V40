@@ -1,3 +1,7 @@
+import os
+import socket
+import sys
+
 from Logic.Data.DataManager import Writer
 
 class LoginOkMessage(Writer):
@@ -9,13 +13,14 @@ class LoginOkMessage(Writer):
         self.version = 1
 
     def encode(self):
+        lastVerFile = open(f"{os.path.dirname(sys.modules['__main__'].__file__)}/ContentUpdater/lastversion.txt", 'r')
         self.writeLong(self.player.HighID, self.player.LowID)
         self.writeLong(self.player.HighID, self.player.LowID)
         self.writeString(self.player.Token)
         self.writeString()
         self.writeString()
         self.writeInt(40)
-        self.writeInt(161)
+        self.writeInt(int(lastVerFile.read().split('...')[0].split('.')[1]))
         self.writeInt(1)
         self.writeString('prod')
         self.writeInt(0)
@@ -31,9 +36,8 @@ class LoginOkMessage(Writer):
         self.writeInt(2)
         self.writeString()
 
-        self.writeInt(2)
-        self.writeString('https://game-assets.brawlstarsgame.com')
-        self.writeString('http://a678dbc1c015a893c9fd-4e8cc3b1ad3a3c940c504815caefa967.r87.cf2.rackcdn.com')
+        self.writeInt(1)
+        self.writeString(f'https://{socket.gethostbyname(socket.gethostname())}:8080')
 
         self.writeInt(2)
         self.writeString('https://event-assets.brawlstars.com')
@@ -48,3 +52,4 @@ class LoginOkMessage(Writer):
         self.writeString('https://play.google.com/store/apps/details?id=com.supercell.brawlstars')
         self.writeString()
         self.writeBoolean(False)
+        lastVerFile.close()

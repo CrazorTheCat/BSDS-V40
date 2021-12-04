@@ -11,13 +11,15 @@ from Messaging.Commands.Client.LogicSelectCharacterCommand import LogicSelectCha
 from Messaging.Commands.Client.LogicSelectEmoteCommand import LogicSelectEmoteCommand
 from Messaging.Commands.Client.LogicSelectSkinCommand import LogicSelectSkinCommand
 from Messaging.Commands.Client.LogicSelectStarPowerCommand import LogicSelectStarPowerCommand
+from Messaging.Commands.Client.LogicSetPlayerNameColorCommand import LogicSetPlayerNameColorCommand
+from Messaging.Commands.Client.LogicSetPlayerThumbnailCommand import LogicSetPlayerThumbnailCommand
 from Messaging.Commands.Client.LogicViewInboxNotificationCommand import LogicViewInboxNotificationCommand
 
 commandIdentifiers = {
     500: LogicGatchaCommand,
     503: 'LogicClaimDailyRewardCommand',
     504: 'LogicSendAllianceMailCommand',
-    505: 'LogicSetPlayerThumbnailCommand',
+    505: LogicSetPlayerThumbnailCommand,
     506: LogicSelectSkinCommand,
     507: 'LogicUnlockSkinCommand',
     508: 'LogicChangeControlModeCommand',
@@ -36,7 +38,7 @@ commandIdentifiers = {
     524: 'LogicVideoStartedCommand',
     525: LogicSelectCharacterCommand,
     526: 'LogicUnlockFreeSkinsCommand',
-    527: 'LogicSetPlayerNameColorCommand',
+    527: LogicSetPlayerNameColorCommand,
     528: LogicViewInboxNotificationCommand,
     529: LogicSelectStarPowerCommand,
     530: 'LogicSetPlayerAgeCommand',
