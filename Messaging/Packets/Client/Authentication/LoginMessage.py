@@ -1,7 +1,8 @@
 import json
+import os
 import time
 import traceback
-
+import sys
 from Database.ClubManager import ClubManager
 from Logic.Client.ClientsManager import ClientsManager
 from Logic.Client.PlayerManager import Players
@@ -15,6 +16,7 @@ from Messaging.Packets.Server.Home.OwnHomeDataMessage import OwnHomeDataMessage
 from Messaging.Packets.Server.Alliance.MyAllianceMessage import MyAllianceMessage
 
 from Logic.Data.DataManager import Reader
+from pathlib import Path
 
 
 class LoginMessage(Reader):
@@ -36,10 +38,11 @@ class LoginMessage(Reader):
             self.player.device.build = self.readInt()
             if self.player.device.major == 0:
                 self.player.device.major = 39
+
+            self.resourceSha = self.readString()
         except:
             self.encrypted = True
 
-        # self.FingerprintSha = self.readString()
         #
         # self.DeviceModel = self.readString()
         # self.IsAndroid = self.readBoolean()
@@ -89,8 +92,14 @@ class LoginMessage(Reader):
                 self.db.LoadAccount(self.player.LowID, self.player)
 
             ClientsManager.AddSocket(self.player.LowID, self.client)
+            lastVerFile = open(f"{os.path.dirname(sys.modules['__main__'].__file__)}/ContentUpdater/lastversion.txt", 'r')
+            lastVerData = lastVerFile.read()
 
-            if self.player.device.major == 40:
+            print(self.resourceSha)
+            if self.resourceSha != lastVerData.split('...')[1]:
+                LoginFailedMessage(self.client, self.player, {'ErrorID': 7, 'Message': None}, json.loads(open(f"{os.path.dirname(sys.modules['__main__'].__file__)}/ContentUpdater/Update/{lastVerData.split('...')[1]}/fingerprint.json", 'r').read())).send(self.client)
+
+            elif self.player.device.major == 40:
                 LoginOkMessage(self.client, self.player).send(self.player.LowID, 2)
                 OwnHomeDataMessage(self.client, self.player).send(self.player.LowID)
                 try:
@@ -110,3 +119,5 @@ class LoginMessage(Reader):
 
             else:
                 print(f"Not supported version Detected: {self.player.device.major}.{self.player.device.build}.{self.player.device.minor}")
+
+            lastVerFile.close()
