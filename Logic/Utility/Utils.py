@@ -1,3 +1,4 @@
+import json
 import time
 import random
 
@@ -30,3 +31,9 @@ class Utils:
 
         elif newRole == 1:
             return False
+
+    def getContentUpdaterInfo():
+        return open(f"../../ContentUpdater/lastversion.txt", 'r').read().split('...')
+
+    def getFingerprintData(resourceSha):
+        return json.dumps(json.loads(open(f"../../ContentUpdater/Update/{resourceSha}/fingerprint.json", 'r').read()))

@@ -7,6 +7,7 @@ from Database.ClubManager import ClubManager
 from Logic.Client.ClientsManager import ClientsManager
 from Logic.Client.PlayerManager import Players
 from Database.DatabaseManager import DatabaseManager
+from Logic.Utility.Utils import Utils
 from Messaging.Packets.Server.Alliance.AllianceStreamMessage import AllianceStreamMessage
 from Messaging.Packets.Server.Alliance.UnknownAllianceMessage import UnknownAllianceMessage
 from Messaging.Packets.Server.Authentication.LoginFailedMessage import LoginFailedMessage
@@ -43,27 +44,6 @@ class LoginMessage(Reader):
         except:
             self.encrypted = True
 
-        #
-        # self.DeviceModel = self.readString()
-        # self.IsAndroid = self.readBoolean()
-        # self.Unknown = self.readBoolean()
-        # self.DeviceLanguage = self.readString()
-        #
-        # self.OSVersion = self.readString()
-        #
-        # self.readInt()
-        # self.readVint()
-        #
-        # self.OpenUDID = self.readString()
-        #
-        # self.readBoolean()
-        # self.readInt()
-        #
-        # self.readInt()
-        # self.readVint()
-        #
-        # self.AppVersion = self.readString()
-
     def process(self):
         if self.encrypted == False:
             self.db = DatabaseManager()
@@ -92,12 +72,10 @@ class LoginMessage(Reader):
                 self.db.LoadAccount(self.player.LowID, self.player)
 
             ClientsManager.AddSocket(self.player.LowID, self.client)
-            lastVerFile = open(f"{os.path.dirname(sys.modules['__main__'].__file__)}/ContentUpdater/lastversion.txt", 'r')
-            lastVerData = lastVerFile.read()
 
-            print(self.resourceSha)
-            if self.resourceSha != lastVerData.split('...')[1]:
-                LoginFailedMessage(self.client, self.player, {'ErrorID': 7, 'Message': None}, json.loads(open(f"{os.path.dirname(sys.modules['__main__'].__file__)}/ContentUpdater/Update/{lastVerData.split('...')[1]}/fingerprint.json", 'r').read())).send(self.client)
+            contentUpdateInfo = Utils.getContentUpdaterInfo()
+            if self.resourceSha != contentUpdateInfo[1]:
+                LoginFailedMessage(self.client, self.player, {'ErrorID': 7, 'Message': None}, Utils.getFingerprintData(contentUpdateInfo[1])).send(self.client)
 
             elif self.player.device.major == 40:
                 LoginOkMessage(self.client, self.player).send(self.player.LowID, 2)
@@ -119,5 +97,3 @@ class LoginMessage(Reader):
 
             else:
                 print(f"Not supported version Detected: {self.player.device.major}.{self.player.device.build}.{self.player.device.minor}")
-
-            lastVerFile.close()

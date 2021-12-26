@@ -18,7 +18,7 @@ class LoginFailedMessage(Writer):
 
     def encode(self):
         self.writeInt(self.errorInfo['ErrorID'])
-        self.writeString(json.dumps(self.fingerprint))
+        self.writeString(self.fingerprint)
         self.writeString()
         self.writeString(self.cndUrl)
         self.writeString()

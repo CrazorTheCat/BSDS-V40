@@ -1,6 +1,4 @@
-import os
 import socket
-import sys
 
 from Logic.Data.DataManager import Writer
 
@@ -13,14 +11,13 @@ class LoginOkMessage(Writer):
         self.version = 1
 
     def encode(self):
-        lastVerFile = open(f"{os.path.dirname(sys.modules['__main__'].__file__)}/ContentUpdater/lastversion.txt", 'r')
         self.writeLong(self.player.HighID, self.player.LowID)
         self.writeLong(self.player.HighID, self.player.LowID)
         self.writeString(self.player.Token)
         self.writeString()
         self.writeString()
         self.writeInt(40)
-        self.writeInt(int(lastVerFile.read().split('...')[0].split('.')[1]))
+        self.writeInt(150)
         self.writeInt(1)
         self.writeString('prod')
         self.writeInt(0)
@@ -52,4 +49,3 @@ class LoginOkMessage(Writer):
         self.writeString('https://play.google.com/store/apps/details?id=com.supercell.brawlstars')
         self.writeString()
         self.writeBoolean(False)
-        lastVerFile.close()
