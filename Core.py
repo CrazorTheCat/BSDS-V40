@@ -9,7 +9,6 @@ from Logic.Data.PacketsHandler import PacketsHandler
 from Logic.Client.PlayerManager import Players
 from Messaging.Packets.Server.Home.LobbyInfoMessage import LobbyInfoMessage
 
-
 class Core:
     def __init__(self):
         self.server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -29,6 +28,7 @@ class ConnectionThread(threading.Thread):
         self.address = address
         self.client = client
         self.player = Players()
+        self.timeout = time.time()
         LobbyInfoMessageThread(self.client).start()
 
     def run(self):
@@ -37,6 +37,12 @@ class ConnectionThread(threading.Thread):
                 time.sleep(0.1)
                 # Reading and processing packet
                 PacketsHandler.ReadHeader(self)
+
+                if time.time() - self.timeout > 7:
+                    print(f"Client with ip: {self.address[0]} disconnected!")
+                    ClientsManager.RemoveSocket(self.player.LowID)
+                    self.client.close()
+                    return
 
         except ConnectionError:
             print(f"Client with ip: {self.address[0]} disconnected!")
@@ -73,6 +79,7 @@ class LobbyInfoMessageThread(threading.Thread):
                     LobbyInfoMessage(self.client, self.player).send(self.client)
                     timeout = time.time()
         except:
+            print(traceback.format_exc())
             return
 
 Core().CoreInit()

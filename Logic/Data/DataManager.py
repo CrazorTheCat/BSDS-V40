@@ -150,7 +150,7 @@ class Writer:
 
         try:
             if self.id == 23457 or self.id == 20103:
-                self.client.send(self.buffer)
+                PlayerLowID.send(self.buffer)
                 return
             ClientsManager.SocketsList["Sockets"][PlayerLowID].send(self.buffer)
         except KeyError:
@@ -233,6 +233,9 @@ class Reader(BufferedReader):
             i += 1
 
         return result
+
+    def readOneBit(self):
+        pass
 
     def readStringBot(self):
         lenght = self.readVint()

@@ -80,10 +80,3 @@ class DatabaseManager():
             self.conn.commit()
         except Exception:
             print(traceback.format_exc())
-
-    def getPlayerDB(self, token):
-        try:
-            self.cursor.execute("SELECT * from main where Token=?", (token,))
-            return self.cursor.fetchall()
-        except Exception:
-            print(traceback.format_exc())
