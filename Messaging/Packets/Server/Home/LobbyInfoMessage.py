@@ -10,5 +10,5 @@ class LobbyInfoMessage(Writer):
 
     def encode(self):
         self.writeVint(ClientsManager.GetCount())
-        self.writeString("Project BSDS\n"f"Version: {self.player.device.major}.{self.player.device.build}.{self.player.device.minor}")
+        self.writeString("Brawl Stars\n"f"Version: {self.player.device.major}.{self.player.device.build}.{self.player.device.minor}")
         self.writeVint(0)
