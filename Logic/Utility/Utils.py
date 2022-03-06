@@ -33,7 +33,7 @@ class Utils:
             return False
 
     def getContentUpdaterInfo():
-        return open(f"../../ContentUpdater/lastversion.txt", 'r').read().split('...')
+        return open(f"././ContentUpdater/lastversion.txt", 'r').read().split('...')
 
     def getFingerprintData(resourceSha):
-        return json.dumps(json.loads(open(f"../../ContentUpdater/Update/{resourceSha}/fingerprint.json", 'r').read()))
+        return json.dumps(json.loads(open(f"././ContentUpdater/Update/{resourceSha}/fingerprint.json", 'r').read()))
